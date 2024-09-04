@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: save-to-pocket-users DynamoDb table definition
+Resources:
+  SaveToPocketUsers:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: user
+          AttributeType: S
+        - AttributeName: hashed_password
+          AttributeType: S
+      BillingMode: PAY_PER_REQUEST
+      DeletionProtectionEnabled: true
+      KeySchema:
+        - AttributeName: user
+          KeyType: HASH
+      OnDemandThroughput:
+        MaxReadRequestUnits: 1
+        MaxWriteRequestUnits: 1
+Outputs:
+  TableName:
+    Description: The name of the users table
+    Value: !Ref SaveToPocketUsers
+    Export:
+      Name: !Sub "${AWS::StackName}-TableName"
+  TableArn:
+    Description: The arn of the users table
+    Value: !GetArr SaveToPocketUsers.Arn
+    Export:
+      Name: !Sub "${AWS::StackName}-TableARN"
