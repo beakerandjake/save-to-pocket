@@ -2,6 +2,7 @@
   "name": "save-to-pocket",
   "version": "1.0.0",
   "description": "Serverless AWS API to save items to Pocket",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,7 +17,10 @@
   },
   "homepage": "https://github.com/beakerandjake/save-to-pocket#readme",
   "devDependencies": {
+    "@eslint/js": "^9.9.1",
+    "eslint": "^9.9.1",
     "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.9.0",
     "prettier": "3.3.3"
   }
 }
