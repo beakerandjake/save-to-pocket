@@ -34,7 +34,7 @@ echo
 
 # update the params with the new values
 aws ssm put-parameter \
-    --name "$consumer_key_value" \
+    --name "$consumer_key_name" \
     --value "$consumer_key_value" \
     --type SecureString \
     --tier Standard \
