@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: SSM Parameter Store parameters for the Pocket consumer key and access key
+Resources:
+  ConsumerKey:
+    Type: AWS::SSM::Parameter
+    Properties:
+      DataType: text
+      Description: The Pocket API consumer key
+      Name: /save-to-pocket/consumer-key
+      Tier: Standard
+      Type: String
+      Value: CHANGE_ME_TO_SECURE_STRING
+  AccessKey:
+    Type: AWS::SSM::Parameter
+    Properties:
+      DataType: text
+      Description: The Pocket API access key
+      Name: /save-to-pocket/access-key
+      Tier: Standard
+      Type: String
+      Value: CHANGE_ME_TO_SECURE_STRING
+Outputs:
+  ConsumerKeyName:
+    Description: The name of the Pocket API consumer key parameter
+    Value: !Ref ConsumerKey
+    Export:
+      Name: !Sub "${AWS::StackName}-ConsumerKey"
+  AccessKeyName:
+    Description: The name of the Pocket API access key parameter
+    Value: !Ref AccessKey
+    Export:
+      Name: !Sub "${AWS::StackName}-AccessKey"
