@@ -1,4 +1,7 @@
 #!/bin/bash
+# Script: add-user.sh
+# Description: Adds a new user item to the UsersTable 
+# Usage: ./add-user.sh <stack-name> <user-name>
 
 stack_name=$1
 user_name=$2
@@ -9,7 +12,7 @@ if [ "$#" -ne 2 ]; then
     exit 1
 fi
 
-# get the table name from the cloudformation stack
+# get the dynamodb table name from the stack
 table_name=$(aws cloudformation describe-stacks \
     --stack-name $stack_name \
     --query "Stacks[0].Outputs[?OutputKey=='TableName'].OutputValue" \
@@ -20,13 +23,13 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# prompt user for the password of the new api user
+# prompt for the password of the new user
 read -sp "password:" p1
 echo
 read -sp "confirm password:" p2
 echo
 
-# bail if passwords do not match
+# ensure entered passwords match
 if [ "$p1" != "$p2" ]; then
     echo "passwords do not match"
     exit 1
