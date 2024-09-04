@@ -1,6 +1,9 @@
 #!/bin/bash
+# Script: deploy-resource.sh
+# Description: Deploys a couldformation template 
+# Usage: ./deploy-resource.sh <file-name> <stack-name>
 
-# ensure correct argument usage
+# ensure correct usage
 if [ "$#" -ne 2 ]; then
     echo "usage: $0 <file-name> <stack-name>"
     exit 1
@@ -15,6 +18,6 @@ fi
 # aws cli expects local templates to be prefixed with file://
 file_arg="file://$1"
 
-# validates the specified cloudformation template then deploys to aws
-aws cloudformation validate-template --template-body $file_arg > /dev/null &&
-aws cloudformation create-stack --stack-name $2 --template-body $file_arg
+# validates before deploy
+aws cloudformation validate-template --template-body $file_arg > /dev/null \ 
+    && aws cloudformation create-stack --stack-name $2 --template-body $file_arg
