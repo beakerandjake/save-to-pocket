@@ -3,6 +3,9 @@
 # Description: Deploys a couldformation template 
 # Usage: ./deploy-resource.sh <file-name> <stack-name>
 
+file_name=$1
+stack_name=$2
+
 # ensure correct usage
 if [ "$#" -ne 2 ]; then
     echo "usage: $0 <file-name> <stack-name>"
@@ -10,14 +13,14 @@ if [ "$#" -ne 2 ]; then
 fi
 
 # ensure requested template file exists
-if [ ! -f $1 ]; then
-    echo "could not find file at: $1"
+if [ ! -f $file_name ]; then
+    echo "could not find file at: $file_name"
     exit 1
 fi
 
 # aws cli expects local templates to be prefixed with file://
-file_arg="file://$1"
+file_arg="file://$file_name"
 
 # validates before deploy
-aws cloudformation validate-template --template-body $file_arg > /dev/null \ 
-    && aws cloudformation create-stack --stack-name $2 --template-body $file_arg
+aws cloudformation validate-template --template-body $file_arg > /dev/null \
+    && aws cloudformation create-stack --stack-name $stack_name --template-body $file_arg
