@@ -1,37 +1,33 @@
 #!/bin/bash
 # Script: add-user.sh
 # Description: Adds a new user item to the UsersTable 
-# Usage: ./add-user.sh <stack-name> <user-name>
+# Usage: ./add-user.sh <db-stack-name> <user-name>
+set -e
 
 stack_name=$1
 user_name=$2
 
 # ensure correct usage
 if [ "$#" -ne 2 ]; then
-    echo "usage: $0 <stack-name> <user-name>"
+    echo "Usage: $0 <db-stack-name> <user-name>"
     exit 1
 fi
 
 # get the dynamodb table name from the stack
 table_name=$(aws cloudformation describe-stacks \
-    --stack-name $stack_name \
+    --stack-name "$stack_name" \
     --query "Stacks[0].Outputs[?OutputKey=='TableName'].OutputValue" \
     --output text)
 
-# bail if failed to get table name
-if [ $? -ne 0 ]; then
-    exit 1
-fi
-
 # prompt for the password of the new user
-read -sp "password:" p1
+read -sp "Password:" p1
 echo
-read -sp "confirm password:" p2
+read -sp "Confirm password:" p2
 echo
 
 # ensure entered passwords match
 if [ "$p1" != "$p2" ]; then
-    echo "passwords do not match"
+    echo "Passwords do not match."
     exit 1
 fi
 
@@ -40,5 +36,7 @@ hashed_password=$(node lib/hashPassword.js $p1)
 
 # save user to table
 aws dynamodb put-item \
-    --table-name $table_name \
+    --table-name "$table_name" \
     --item "{\"user\":{\"S\": \"$user_name\"},\"hashed_password\":{\"S\":\"$hashed_password\"}}"
+
+echo "Successfully added to Users table."
