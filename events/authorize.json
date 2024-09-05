@@ -7,7 +7,7 @@
   "headers": {
     "X-AMZ-Date": "20170718T062915Z",
     "Accept": "*/*",
-    "Authorization": "Basic dXNlcm5hbWU6cGFzc3dvcmQK",
+    "authorization": "Basic dXNlcm5hbWU6cGFzc3dvcmQK",
     "CloudFront-Viewer-Country": "US",
     "CloudFront-Forwarded-Proto": "https",
     "CloudFront-Is-Tablet-Viewer": "false",
