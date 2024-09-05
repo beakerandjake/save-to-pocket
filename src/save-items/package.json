@@ -1,0 +1,6 @@
+{
+  "name": "save-items",
+  "main": "index.js",
+  "type": "module",
+  "license": "GPL-3.0"
+}
