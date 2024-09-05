@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: API layer for save-to-pocket application
+
+# TODO
+Globals:
+
+Resources:
+  SaveItemFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs20.x
+      CodeUri: src/save-items
+      Description: Saves an item to Pocket using the Pocket API
+      Architectures:
+        - x86_64
+
+Outputs:
+  SaveItemFunction:
+    Description: Save Item to Pocket Lambda Function
+    Value: !GetAtt SaveItemFunction.Arn
