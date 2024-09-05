@@ -4,7 +4,7 @@
   "description": "Serverless AWS API to save items to Pocket",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test-save-item": "sam local invoke --env-vars locals.json --event events/save-item.json"
   },
   "repository": {
     "type": "git",
