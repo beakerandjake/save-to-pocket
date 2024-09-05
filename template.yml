@@ -7,6 +7,10 @@ Parameters:
     Description: The name of the cloudformation stack which exports config settings
     Type: String
     Default: save-to-pocket-config
+  ApiVersion:
+    Description: The version of the API for consumers
+    Type: String
+    Default: v1
 
 Globals:
   Function:
@@ -16,6 +20,12 @@ Globals:
       - x86_64
 
 Resources:
+  SaveItemApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      Description: Api Gateway HTTP Api to save items to pocket
+      StageName: !Ref ApiVersion
+
   SaveItemFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -27,6 +37,17 @@ Resources:
             Fn::ImportValue: !Sub '${ConfigStackName}-AccessToken'
           POCKET_CONSUMER_KEY_PARAM_NAME:
             Fn::ImportValue: !Sub '${ConfigStackName}-ConsumerKey'
+      Events:
+        PostItem:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref SaveItemApi
+            Method: POST
+            Path: /items
+            RouteSettings:
+              ThrottlingBurstLimit: 1
+              ThrottlingRateLimit: 1
+
       Policies:
         - SSMParameterWithSlashPrefixReadPolicy:
             ParameterName:
