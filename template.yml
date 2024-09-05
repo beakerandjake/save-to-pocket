@@ -28,16 +28,12 @@ Resources:
           POCKET_CONSUMER_KEY_PARAM_NAME:
             Fn::ImportValue: !Sub '${ConfigStackName}-ConsumerKey'
       Policies:
-        - AWSSecretsManagerGetSecretValuePolicy:
-            SecretArn: !Sub
-              - 'arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:${ParamName}'
-              - ParamName:
-                  Fn::ImportValue: !Sub '${ConfigStackName}-AccessToken'
-        - AWSSecretsManagerGetSecretValuePolicy:
-            SecretArn: !Sub
-              - 'arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:${ParamName}'
-              - ParamName:
-                  Fn::ImportValue: !Sub '${ConfigStackName}-ConsumerKey'
+        - SSMParameterWithSlashPrefixReadPolicy:
+            ParameterName:
+              Fn::ImportValue: !Sub '${ConfigStackName}-AccessToken'
+        - SSMParameterWithSlashPrefixReadPolicy:
+            ParameterName:
+              Fn::ImportValue: !Sub '${ConfigStackName}-ConsumerKey'
 
 Outputs:
   SaveItemFunction:
