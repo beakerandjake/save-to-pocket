@@ -10,12 +10,12 @@ Resources:
       Tier: Standard
       Type: String
       Value: CHANGE_ME_TO_SECURE_STRING
-  AccessKey:
+  AccessToken:
     Type: AWS::SSM::Parameter
     Properties:
       DataType: text
-      Description: The Pocket API access key
-      Name: /save-to-pocket/access-key
+      Description: The Pocket API access token
+      Name: /save-to-pocket/access-token
       Tier: Standard
       Type: String
       Value: CHANGE_ME_TO_SECURE_STRING
@@ -25,8 +25,8 @@ Outputs:
     Value: !Ref ConsumerKey
     Export:
       Name: !Sub "${AWS::StackName}-ConsumerKey"
-  AccessKeyName:
-    Description: The name of the Pocket API access key parameter
-    Value: !Ref AccessKey
+  AccessTokenName:
+    Description: The name of the Pocket API access token parameter
+    Value: !Ref AccessToken
     Export:
-      Name: !Sub "${AWS::StackName}-AccessKey"
+      Name: !Sub "${AWS::StackName}-AccessToken"
