@@ -1,15 +1,20 @@
 import { getSecrets } from './getSecrets.js';
-import { memoize } from './util.js';
+import { add } from './pocketApi.js';
+import { getItemUrl, memoize, response } from './util.js';
 
 const getSecretsMemoized = memoize(getSecrets);
 
 export const handler = async (event) => {
-  const { consumerKey, accessToken } = await getSecretsMemoized();
-  console.log(`got consumer key: ${consumerKey}`);
-  console.log(`consumer key param name: ${accessToken}`);
-  console.log(`hello: ${JSON.stringify(event)}`);
-  return {
-    statusCode: 200,
-    body: JSON.stringify('Great Job'),
-  };
+  try {
+    const url = getItemUrl(event);
+    if (!url) {
+      return response(400, 'Bad Request');
+    }
+    const { consumerKey, accessToken } = await getSecretsMemoized();
+    await add(url, consumerKey, accessToken);
+    return response(200, 'Item saved');
+  } catch (error) {
+    console.error('Unhandled exception', error);
+    return response(500, 'Failed to save item');
+  }
 };
