@@ -2,21 +2,23 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: API layer for save-to-pocket application
 
-# TODO
-# Globals:
-
 Parameters:
   ConfigStackName:
     Description: The name of the cloudformation stack which exports config settings
     Type: String
     Default: save-to-pocket-config
 
+Globals:
+  Function:
+    Runtime: nodejs20.x
+    Handler: index.handler
+    Architectures:
+      - x86_64
+
 Resources:
   SaveItemFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: index.handler
-      Runtime: nodejs20.x
       CodeUri: src/save-items
       Description: Saves an item to Pocket using the Pocket API
       Environment:
@@ -25,8 +27,6 @@ Resources:
             Fn::ImportValue: !Sub '${ConfigStackName}-AccessToken'
           POCKET_CONSUMER_KEY_PARAM_NAME:
             Fn::ImportValue: !Sub '${ConfigStackName}-ConsumerKey'
-      Architectures:
-        - x86_64
 
 Outputs:
   SaveItemFunction:
