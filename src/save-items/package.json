@@ -1,5 +1,7 @@
 {
   "name": "save-items",
+  "version": "1.0.0",
+  "description": "Lambda which saves an item to Pocket",
   "main": "index.js",
   "type": "module",
   "license": "GPL-3.0"
