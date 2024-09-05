@@ -1,4 +1,4 @@
-const POCKET_URL = "https://getpocket.com/v3/add";
+const POCKET_URL = 'https://getpocket.com/v3/add';
 
 /**
  * Adds the specified url to the pocket account defined by the access_token.
@@ -7,22 +7,22 @@ const POCKET_URL = "https://getpocket.com/v3/add";
  * @param {string} accessToken - The access token of the user
  * @returns {any} See response details: https://getpocket.com/developer/docs/v3/add
  */
-export const add = async (url, consumerKey, accessToken) => {
+export const addItem = async (url, consumerKey, accessToken) => {
   if (!url) {
-    throw new Error("url is required");
+    throw new Error('url is required');
   }
   if (!consumerKey) {
-    throw new Error("consumerKey is required");
+    throw new Error('consumerKey is required');
   }
   if (!accessToken) {
-    throw new Error("accessToken is required.");
+    throw new Error('accessToken is required.');
   }
 
   const response = await fetch(POCKET_URL, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json; charset=UTF-8",
-      "X-Accept": "application/json",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'X-Accept': 'application/json',
     },
     body: JSON.stringify({
       url: encodeURI(url),
@@ -32,7 +32,7 @@ export const add = async (url, consumerKey, accessToken) => {
   });
 
   if (!response.ok) {
-    const errorMessage = response.headers.get("x-error");
+    const errorMessage = response.headers.get('x-error');
     throw new Error(
       `Failed to save: Status ${response.status} - ${errorMessage}`,
     );
