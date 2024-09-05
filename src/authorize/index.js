@@ -1,8 +1,9 @@
-import { getBasicAuth, response } from './util.js';
+import { parseBasicAuth, response } from './util.js';
 
 export const handler = async (event) => {
   try {
-    const [username, password] = getBasicAuth(event);
+    console.log(`Got event: ${JSON.stringify(event)}`);
+    const [username, password] = parseBasicAuth(event.identitySource[0]);
     console.log(`got: ${username}, password: ${password}`);
     return response(true);
   } catch (error) {

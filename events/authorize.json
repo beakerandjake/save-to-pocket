@@ -1,48 +1,50 @@
 {
+  "version": "2.0",
   "type": "REQUEST",
-  "methodArn": "arn:aws:execute-api:us-west-1:123456789012:/test/GET/request",
-  "resource": "/request",
-  "path": "/request",
-  "httpMethod": "GET",
+  "routeArn": "arn:aws:execute-api:us-east-1:123456789012:abcdef123/test/GET/request",
+  "identitySource": ["Basic dXNlcm5hbWU6cGFzc3dvcmQK"],
+  "routeKey": "$default",
+  "rawPath": "/my/path",
+  "rawQueryString": "parameter1=value1&parameter1=value2&parameter2=value",
+  "cookies": ["cookie1", "cookie2"],
   "headers": {
-    "X-AMZ-Date": "20170718T062915Z",
-    "Accept": "*/*",
     "authorization": "Basic dXNlcm5hbWU6cGFzc3dvcmQK",
-    "CloudFront-Viewer-Country": "US",
-    "CloudFront-Forwarded-Proto": "https",
-    "CloudFront-Is-Tablet-Viewer": "false",
-    "CloudFront-Is-Mobile-Viewer": "false",
-    "User-Agent": "..."
+    "header2": "value2"
   },
   "queryStringParameters": {
-    "QueryString1": "queryValue1"
-  },
-  "pathParameters": {},
-  "stageVariables": {
-    "StageVar1": "stageValue1"
+    "parameter1": "value1,value2",
+    "parameter2": "value"
   },
   "requestContext": {
-    "path": "/request",
     "accountId": "123456789012",
-    "resourceId": "05c7jb",
-    "stage": "test",
-    "requestId": "...",
-    "identity": {
-      "apiKey": "...",
-      "sourceIp": "...",
+    "apiId": "api-id",
+    "authentication": {
       "clientCert": {
         "clientCertPem": "CERT_CONTENT",
         "subjectDN": "www.example.com",
         "issuerDN": "Example issuer",
-        "serialNumber": "a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1",
+        "serialNumber": "1",
         "validity": {
           "notBefore": "May 28 12:30:02 2019 GMT",
           "notAfter": "Aug  5 09:36:04 2021 GMT"
         }
       }
     },
-    "resourcePath": "/request",
-    "httpMethod": "GET",
-    "apiId": ""
-  }
+    "domainName": "id.execute-api.us-east-1.amazonaws.com",
+    "domainPrefix": "id",
+    "http": {
+      "method": "POST",
+      "path": "/my/path",
+      "protocol": "HTTP/1.1",
+      "sourceIp": "IP",
+      "userAgent": "agent"
+    },
+    "requestId": "id",
+    "routeKey": "$default",
+    "stage": "$default",
+    "time": "12/Mar/2020:19:03:58 +0000",
+    "timeEpoch": 1583348638390
+  },
+  "pathParameters": { "parameter1": "value1" },
+  "stageVariables": { "stageVariable1": "value1", "stageVariable2": "value2" }
 }

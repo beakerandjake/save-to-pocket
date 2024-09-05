@@ -28,6 +28,17 @@ Resources:
       AccessLogSettings:
         DestinationArn: !GetAtt AccessLogs.Arn
         Format: $context.identity.sourceIp - - [$context.requestTime] "$context.httpMethod $context.routeKey $context.protocol" $context.status $context.responseLength $context.requestId
+      Auth:
+        DefaultAuthorizer: LambdaAuthorizer
+        Authorizers:
+          LambdaAuthorizer:
+            AuthorizerPayloadFormatVersion: 2.0
+            EnableFunctionDefaultPermissions: true
+            EnableSimpleResponses: true
+            FunctionArn: !GetAtt AuthorizeFunction.Arn
+            Identity:
+              Headers:
+                - Authorization
       DefaultRouteSettings:
         ThrottlingBurstLimit: 1
         ThrottlingRateLimit: 1
