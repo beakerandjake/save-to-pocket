@@ -18,11 +18,11 @@ outputs=$(aws cloudformation describe-stacks \
     --query "Stacks[0].Outputs")
 
 # expect the stack exports the names of the consumer / access key params for us
-access_key_name=$(echo $outputs | jq -r '.[] | select(.OutputKey == "AccessKeyName") | .OutputValue')
+access_key_name=$(echo $outputs | jq -r '.[] | select(.OutputKey == "AccessTokenName") | .OutputValue')
 consumer_key_name=$(echo $outputs | jq -r '.[] | select(.OutputKey == "ConsumerKeyName") | .OutputValue')
 
 if [ -z "$access_key_name" ] || [ -z "$consumer_key_name" ]; then
-    echo "Failed to get access key / consumer key from describe-stacks output."
+    echo "Failed to get access token / consumer key from describe-stacks output."
     exit 1
 fi
 
