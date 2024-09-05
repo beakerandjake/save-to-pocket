@@ -5,6 +5,12 @@ Description: API layer for save-to-pocket application
 # TODO
 # Globals:
 
+Parameters:
+  ConfigStackName:
+    Description: The name of the cloudformation stack which exports config settings
+    Type: String
+    Default: save-to-pocket-config
+
 Resources:
   SaveItemFunction:
     Type: AWS::Serverless::Function
@@ -15,8 +21,10 @@ Resources:
       Description: Saves an item to Pocket using the Pocket API
       Environment:
         Variables:
-          POCKET_ACCESS_KEY_PARAM_NAME: asdf
-          POCKET_CONSUMER_KEY_PARAM_NAME: qwer
+          POCKET_ACCESS_KEY_PARAM_NAME:
+            Fn::ImportValue: !Sub '${ConfigStackName}-AccessKey'
+          POCKET_CONSUMER_KEY_PARAM_NAME:
+            Fn::ImportValue: !Sub '${ConfigStackName}-ConsumerKey'
       Architectures:
         - x86_64
 
