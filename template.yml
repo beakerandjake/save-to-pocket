@@ -21,7 +21,7 @@ Resources:
       Description: Saves an item to Pocket using the Pocket API
       Environment:
         Variables:
-          POCKET_ACCESS_KEY_PARAM_NAME:
+          POCKET_ACCESS_TOKEN_PARAM_NAME:
             Fn::ImportValue: !Sub '${ConfigStackName}-AccessKey'
           POCKET_CONSUMER_KEY_PARAM_NAME:
             Fn::ImportValue: !Sub '${ConfigStackName}-ConsumerKey'
