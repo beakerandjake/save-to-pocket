@@ -22,7 +22,7 @@ Resources:
       Environment:
         Variables:
           POCKET_ACCESS_TOKEN_PARAM_NAME:
-            Fn::ImportValue: !Sub '${ConfigStackName}-AccessKey'
+            Fn::ImportValue: !Sub '${ConfigStackName}-AccessToken'
           POCKET_CONSUMER_KEY_PARAM_NAME:
             Fn::ImportValue: !Sub '${ConfigStackName}-ConsumerKey'
       Architectures:

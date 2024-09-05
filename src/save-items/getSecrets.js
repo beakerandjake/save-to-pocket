@@ -17,7 +17,7 @@ const extractParameter = (parameters, key) => {
 /**
  * Loads the encrypted secrets from the SSM Parameter Store
  */
-const loadSecrets = async () => {
+export const getSecrets = async () => {
   const client = new SSMClient();
   const { Parameters: parameters } = await client.send(
     new GetParametersCommand({
@@ -39,18 +39,3 @@ const loadSecrets = async () => {
     ),
   };
 };
-
-// load secrets once during start up, they are not expected to change during runtime
-const { consumerKey, accessToken } = await loadSecrets();
-
-/**
- * Returns the pocket consumer key which identifies this application.
- * @returns {Promise<string>}
- */
-export const getConsumerKey = async () => consumerKey;
-
-/**
- * Returns the pocket access token which identifiers the user we are saving items for.
- * @returns {Promise<string>}
- */
-export const getAccessToken = async () => accessToken;
