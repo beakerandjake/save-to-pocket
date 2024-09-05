@@ -19,7 +19,7 @@ Resources:
   SaveItemFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: src/save-items
+      CodeUri: src/save-item
       Description: Saves an item to Pocket using the Pocket API
       Environment:
         Variables:
