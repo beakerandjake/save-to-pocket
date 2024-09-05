@@ -13,6 +13,10 @@ Resources:
       Runtime: nodejs20.x
       CodeUri: src/save-items
       Description: Saves an item to Pocket using the Pocket API
+      Environment:
+        Variables:
+          POCKET_ACCESS_KEY_PARAM_NAME: asdf
+          POCKET_CONSUMER_KEY_PARAM_NAME: qwer
       Architectures:
         - x86_64
 
