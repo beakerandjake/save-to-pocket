@@ -5,7 +5,8 @@ export const handler = async (event) => {
     console.log(`Got event: ${JSON.stringify(event)}`);
     const [username, password] = parseBasicAuth(event.identitySource[0]);
     console.log(`got: ${username}, password: ${password}`);
-    return response(true);
+    return username === 'username' ? response(true) : response(false);
+    // return response(true);
   } catch (error) {
     console.error('Unhandled exception', error);
     return response(false);
