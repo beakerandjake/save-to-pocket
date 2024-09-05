@@ -10,8 +10,8 @@ export const handler = async (event) => {
     if (!url) {
       return response(400, 'Bad Request');
     }
-    const { consumerKey, accessToken } = await getSecretsMemoized();
-    await addItem(url, consumerKey, accessToken);
+    // const { consumerKey, accessToken } = await getSecretsMemoized();
+    // await addItem(url, consumerKey, accessToken);
     return response(200, 'Item saved');
   } catch (error) {
     console.error('Unhandled exception', error);
