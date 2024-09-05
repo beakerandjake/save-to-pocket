@@ -25,6 +25,15 @@ Resources:
     Properties:
       Description: Api Gateway HTTP Api to save items to pocket
       StageName: !Ref ApiVersion
+      AccessLogSettings:
+        DestinationArn: !GetAtt AccessLogs.Arn
+        Format: $context.identity.sourceIp - - [$context.requestTime] "$context.httpMethod $context.routeKey $context.protocol" $context.status $context.responseLength $context.requestId
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 1
+        ThrottlingRateLimit: 1
+
+  AccessLogs:
+    Type: AWS::Logs::LogGroup
 
   SaveItemFunction:
     Type: AWS::Serverless::Function
@@ -44,10 +53,6 @@ Resources:
             ApiId: !Ref SaveItemApi
             Method: POST
             Path: /items
-            RouteSettings:
-              ThrottlingBurstLimit: 1
-              ThrottlingRateLimit: 1
-
       Policies:
         - SSMParameterWithSlashPrefixReadPolicy:
             ParameterName:
