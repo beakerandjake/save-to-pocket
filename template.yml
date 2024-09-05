@@ -3,7 +3,7 @@ Transform: AWS::Serverless-2016-10-31
 Description: API layer for save-to-pocket application
 
 # TODO
-Globals:
+# Globals:
 
 Resources:
   SaveItemFunction:
