@@ -61,6 +61,12 @@ Resources:
             ParameterName:
               Fn::ImportValue: !Sub '${ConfigStackName}-ConsumerKey'
 
+  AuthorizeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/authorize
+      Description: Lambda Authorizer for API Gateway
+
 Outputs:
   SaveItemFunction:
     Description: Save Item to Pocket Lambda Function
