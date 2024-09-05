@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: SSM Parameter Store parameters for the Pocket consumer key and access key
+Description: Configuration layer for save-to-pocket application
 Resources:
   ConsumerKey:
     Type: AWS::SSM::Parameter

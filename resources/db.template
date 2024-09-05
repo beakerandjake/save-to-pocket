@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: save-to-pocket-users DynamoDb table definition
+Description: Database layer for save-to-pocket application
 Resources:
   UsersTable:
     Type: AWS::DynamoDB::Table
