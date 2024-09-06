@@ -45,24 +45,10 @@ fi
 # HTTP Basic auth expects we base64 encode 'username:password'
 basic_auth=$(echo -n "${username}:${password}" | base64)
 
-# suppress curl output and manually handle status codes / messages 
-status=$(curl -X POST $api_url \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Basic $basic_auth" \
-            -d "{\"url\":\"$item_url\"}" \
-            -s -o /dev/null \
-            -w "%{http_code}")
+curl -X POST $api_url \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Basic $basic_auth" \
+    -d "{\"url\":\"$item_url\"}" \
+    -w "\n"
 
-# API gateway could return 401 or 403 for unauthorized
-if [ "$status" -eq 401 ] || [ "$status" -eq 403 ]; then
-    echo "Authorization failed"
-    exit 1
-fi  
-
-# handle any other non-success status codes
-if [ "$status" -ne 200 ]; then
-    echo "Add item failed with status code: $status"
-    exit 1
-fi
-
-echo "Item saved to pocket"
+    
