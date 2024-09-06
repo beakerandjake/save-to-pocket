@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Serverless AWS API to save items to Pocket",
   "type": "module",
+  "workspaces": [
+    "src/*"
+  ],
   "scripts": {
     "save-item": "sam local invoke --env-vars locals.json --event events/save-item.json SaveItemFunction",
     "authorize": "sam local invoke --env-vars locals.json --event events/authorize.json AuthorizeFunction"

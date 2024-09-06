@@ -1,8 +1,11 @@
 {
-  "name": "save-items",
+  "name": "save-item",
   "version": "1.0.0",
   "description": "Lambda which saves an item to Pocket",
   "main": "index.js",
   "type": "module",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "@aws-sdk/client-ssm": "^3.645.0"
+  }
 }
