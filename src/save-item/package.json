@@ -5,6 +5,9 @@
   "main": "index.js",
   "type": "module",
   "license": "GPL-3.0",
+  "scripts": {
+    "test": "sam local invoke -t ../../template.yml -n ../../locals.json -e ../../events/save-item.json SaveItemFunction"
+  },
   "devDependencies": {
     "@aws-sdk/client-ssm": "^3.645.0"
   }
