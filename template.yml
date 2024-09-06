@@ -43,7 +43,7 @@ Resources:
             Identity:
               Headers:
                 - Authorization
-              # ReauthorizeEvery: 3600
+              ReauthorizeEvery: 3600
       DefaultRouteSettings:
         ThrottlingBurstLimit: 1
         ThrottlingRateLimit: 1
