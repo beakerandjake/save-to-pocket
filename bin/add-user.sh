@@ -37,6 +37,6 @@ hashed_password=$(node lib/hashPassword.js $p1)
 # save user to table
 aws dynamodb put-item \
     --table-name "$table_name" \
-    --item "{\"user\":{\"S\": \"$user_name\"},\"hashed_password\":{\"S\":\"$hashed_password\"}}"
+    --item "{\"id\":{\"S\": \"$user_name\"},\"hashed_password\":{\"S\":\"$hashed_password\"}}"
 
 echo "Successfully added to Users table."
