@@ -7,8 +7,7 @@
     "src/*"
   ],
   "scripts": {
-    "save-item": "sam local invoke --env-vars locals.json --event events/save-item.json SaveItemFunction",
-    "authorize": "sam local invoke --env-vars locals.json --event events/authorize.json AuthorizeFunction"
+    "test": "npm test --workspaces"
   },
   "repository": {
     "type": "git",
