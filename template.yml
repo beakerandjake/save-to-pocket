@@ -69,6 +69,7 @@ Resources:
             ApiId: !Ref SaveItemApi
             Method: POST
             Path: /items
+      MemorySize: 512
       Policies:
         - SSMParameterWithSlashPrefixReadPolicy:
             ParameterName:
@@ -86,6 +87,7 @@ Resources:
         Variables:
           DYNAMODB_TABLE_NAME:
             Fn::ImportValue: !Sub '${DbStackName}-TableName'
+      MemorySize: 1024
     Connectors:
       DBStackConnector:
         Properties:
