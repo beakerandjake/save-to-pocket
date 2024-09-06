@@ -98,5 +98,11 @@ Resources:
 
 Outputs:
   SaveItemFunction:
-    Description: Save Item to Pocket Lambda Function
+    Description: Save Item to Pocket Lambda Function Arn
     Value: !GetAtt SaveItemFunction.Arn
+  AuthorizeFunction:
+    Description: Authorize user Lambda Function Arn
+    Value: !GetAtt AuthorizeFunction.Arn
+  SaveToPocketApi:
+    Description: API Gateway endpoint URL for Save To Pocket API
+    Value: !GetAtt SaveItemApi.ApiEndpoint
