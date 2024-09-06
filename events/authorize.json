@@ -2,13 +2,13 @@
   "version": "2.0",
   "type": "REQUEST",
   "routeArn": "arn:aws:execute-api:us-east-1:123456789012:abcdef123/test/GET/request",
-  "identitySource": ["Basic dXNlcm5hbWU6cGFzc3dvcmQK"],
+  "identitySource": ["Basic dXNlcm5hbWU6cGFzc3dvcmQ="],
   "routeKey": "$default",
   "rawPath": "/my/path",
   "rawQueryString": "parameter1=value1&parameter1=value2&parameter2=value",
   "cookies": ["cookie1", "cookie2"],
   "headers": {
-    "authorization": "Basic dXNlcm5hbWU6cGFzc3dvcmQK",
+    "authorization": "Basic dXNlcm5hbWU6cGFzc3dvcmQ=",
     "header2": "value2"
   },
   "queryStringParameters": {
