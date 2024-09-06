@@ -7,6 +7,10 @@ Parameters:
     Description: The name of the cloudformation stack which exports config settings
     Type: String
     Default: save-to-pocket-config
+  DbStackName:
+    Description: The name of the cloudformation stack which exports database information
+    Type: String
+    Default: save-to-pocket-db
   ApiVersion:
     Description: The version of the API for consumers
     Type: String
@@ -78,6 +82,10 @@ Resources:
     Properties:
       CodeUri: src/authorize
       Description: Lambda Authorizer for API Gateway
+      Environment:
+        Variables:
+          DYNAMODB_TABLE_NAME:
+            Fn::ImportValue: !Sub '${DbStackName}-TableName'
 
 Outputs:
   SaveItemFunction:
