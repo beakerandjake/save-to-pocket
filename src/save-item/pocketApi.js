@@ -5,7 +5,7 @@ const POCKET_URL = 'https://getpocket.com/v3/add';
  * @param {string} url - The url of the item to save
  * @param {string} consumerKey - The consumer key of this application
  * @param {string} accessToken - The access token of the user
- * @returns {any} See response details: https://getpocket.com/developer/docs/v3/add
+ * @returns {Promise<Response>} See response details: https://getpocket.com/developer/docs/v3/add
  */
 export const addItem = async (url, consumerKey, accessToken) => {
   if (!url) {
@@ -18,7 +18,7 @@ export const addItem = async (url, consumerKey, accessToken) => {
     throw new Error('accessToken is required.');
   }
 
-  const response = await fetch(POCKET_URL, {
+  return fetch(POCKET_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=UTF-8',
@@ -30,13 +30,4 @@ export const addItem = async (url, consumerKey, accessToken) => {
       access_token: accessToken,
     }),
   });
-
-  if (!response.ok) {
-    const errorMessage = response.headers.get('x-error');
-    throw new Error(
-      `Failed to save: Status ${response.status} - ${errorMessage}`,
-    );
-  }
-
-  return response.json();
 };

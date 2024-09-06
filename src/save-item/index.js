@@ -10,8 +10,15 @@ export const handler = async (event) => {
     if (!url) {
       return response(400, 'Bad Request');
     }
-    // const { consumerKey, accessToken } = await getSecretsMemoized();
-    // await addItem(url, consumerKey, accessToken);
+    const { consumerKey, accessToken } = await getSecretsMemoized();
+    const pocketResponse = await addItem(url, consumerKey, accessToken);
+    // display Pocket API errors to the users
+    if (!pocketResponse.ok) {
+      return response(
+        pocketResponse.status,
+        `Pocket integration failed with message: ${pocketResponse.headers.get('x-error')}`,
+      );
+    }
     return response(200, 'Item saved');
   } catch (error) {
     console.error('Unhandled exception', error);
