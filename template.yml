@@ -86,6 +86,15 @@ Resources:
         Variables:
           DYNAMODB_TABLE_NAME:
             Fn::ImportValue: !Sub '${DbStackName}-TableName'
+    Connectors:
+      DBStackConnector:
+        Properties:
+          Destination:
+            Type: AWS::DynamoDB::Table
+            Arn:
+              Fn::ImportValue: !Sub '${DbStackName}-TableArn'
+          Permissions:
+            - Read
 
 Outputs:
   SaveItemFunction:
