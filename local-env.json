@@ -2,5 +2,8 @@
   "SaveItemFunction": {
     "POCKET_ACCESS_TOKEN_PARAM_NAME": "/save-to-pocket/access-token",
     "POCKET_CONSUMER_KEY_PARAM_NAME": "/save-to-pocket/consumer-key"
+  },
+  "AuthorizeFunction": {
+    "DYNAMODB_TABLE_NAME": "enter-table-name-here"
   }
 }
