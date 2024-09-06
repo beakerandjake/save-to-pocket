@@ -30,7 +30,7 @@ Resources:
       Description: Api Gateway HTTP Api to save items to pocket
       StageName: !Ref ApiVersion
       AccessLogSettings:
-        DestinationArn: !GetAtt AccessLogs.Arn
+        DestinationArn: !GetAtt ApiAccessLogs.Arn
         Format: $context.identity.sourceIp - - [$context.requestTime] "$context.httpMethod $context.routeKey $context.protocol" $context.status $context.responseLength $context.requestId
       Auth:
         DefaultAuthorizer: LambdaAuthorizer
@@ -48,7 +48,7 @@ Resources:
         ThrottlingBurstLimit: 1
         ThrottlingRateLimit: 1
 
-  AccessLogs:
+  ApiAccessLogs:
     Type: AWS::Logs::LogGroup
 
   SaveItemFunction:
