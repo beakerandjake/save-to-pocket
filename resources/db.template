@@ -25,4 +25,4 @@ Outputs:
     Description: The arn of the users table
     Value: !GetAtt UsersTable.Arn
     Export:
-      Name: !Sub "${AWS::StackName}-TableARN"
+      Name: !Sub "${AWS::StackName}-TableArn"
