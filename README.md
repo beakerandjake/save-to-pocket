@@ -75,7 +75,7 @@ The application is split between a frontend AWS SAM application for the API Gate
 
 ## Getting Started
 
-This is a walkthrough to getting the application deployed to your AWS account. All scripts and commands in this project are for a Linux scripting environment.
+This is a walkthrough to getting the application deployed to your AWS account.
 
 ### Prerequisites
 
@@ -85,6 +85,8 @@ You will need the following software installed on your machine:
 - [aws-sam-cli][aws-sam-cli-url] 1.x (I prefer a local pip venv install rather than a system wide install)
 - [node.js][Node-url] 20.x
 - [jq][jq-url] 1.x
+
+You will also need a Pocket account.
 
 #### Create a Pocket API App
 
@@ -99,23 +101,30 @@ Once your application is created, it will be given a _Consumer Key_. This key wi
 
 ### Installation
 
-1. Create a pocket application and note the _Consumer Key_ (see instructions)[#create_a_pocket_api_app]
+All commands are meant for a Linux environment and should be executed against the root of the repository.
+
+1. Create a pocket application and note the _Consumer Key_ ([see instructions](#create-a-pocket-api-app))
 2. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/beakerandjake/save-to-pocket.git
    ```
-3. Install NPM packages
+3. Install NPM packages (Optional, only necessary for local development)
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-5. Change git remote url to avoid accidental pushes to base project
+4. Activate venv for aws-sam-cli (Optional, only necessary if you installed through a venv)
+
    ```sh
-   git remote set-url origin github_username/repo_name
-   git remote -v # confirm the changes
+   source .venv/bin/activate
+   ```
+5. Connect your Pocket account to the Pocket App you created in Step 1
+   ```js
+   bin/pocket-auth.sh
+   ```
+   This command will perform the Oauth flow to connect your Pocket account to the App you made. You will be asked to open a URL in your web browser and sign into pocket. Once signed in the command will output a Pocket _Access Token_ which you will need in a later step  
+6. Deploy the application to AWS
+   ```sh
+   bin/deploy.sh
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
