@@ -16,7 +16,7 @@ frontend_stack_name=save-to-pocket-frontend
 echo "Deploying $config_stack_name stack..."
 bin/deploy-resource.sh resources/config.template "$config_stack_name" > /dev/null
 aws cloudformation wait stack-create-complete --stack-name "$config_stack_name"
-echo "Successfully deployed $config_stack_name."
+echo "Successfully deployed $config_stack_name stack."
 
 # add the actual credentials to the newly created config stack
 bin/save-pocket-credentials.sh "$config_stack_name"
@@ -29,7 +29,7 @@ bin/save-pocket-credentials.sh "$config_stack_name"
 echo "Deploying $db_stack_name stack..."
 bin/deploy-resource.sh resources/db.template "$db_stack_name" > /dev/null
 aws cloudformation wait stack-create-complete --stack-name "$db_stack_name"
-echo "Successfully deployed $db_stack_name."
+echo "Successfully deployed $db_stack_name stack."
 
 # ensure at least one user is in the database
 read -p "Enter default user [user]: " user_name
@@ -46,7 +46,7 @@ sam deploy \
     --stack-name "$frontend_stack_name" \
     --no-confirm-changeset \
     --no-progressbar > /dev/null
-echo "Successfully deployed $frontend_stack_name."
+echo "Successfully deployed $frontend_stack_name stack."
 
 # get the api url from the frontend stack
 api_url=$(aws cloudformation describe-stacks \
