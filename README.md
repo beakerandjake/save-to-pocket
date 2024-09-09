@@ -58,8 +58,7 @@ Under the hood it uses AWS SAM, API Gateway, DynamoDb, Lambda, Cloudformation an
 
 The application is split between a frontend AWS SAM application for the API Gateway and related Lambdas, and two backend Cloudformation stacks for the DynamoDB database and SSM Parameter Store parameters. Organizing the stacks based on lifecycle separates the persistent resources like the database and configuration from the frequently changing ones like the API Gateway.
 
-
-![architecture drawio](https://github.com/user-attachments/assets/b4d7ffef-ca39-47f3-9fe1-c42a6a7c447f)
+![architecture-diagram]
 
 
 
@@ -191,6 +190,7 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[architecture-diagram]: https://github.com/user-attachments/assets/b4d7ffef-ca39-47f3-9fe1-c42a6a7c447f
 
 [contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
 [contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
