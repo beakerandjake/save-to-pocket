@@ -1,5 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: Configuration layer for save-to-pocket application
+# Not possible to create SecureString params via cloudformation.
+# So create as Strings and change to SecureString in the deploy.sh script
 Resources:
   ConsumerKey:
     Type: AWS::SSM::Parameter
