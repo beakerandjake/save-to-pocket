@@ -18,10 +18,10 @@ outputs=$(aws cloudformation describe-stacks \
     --query "Stacks[0].Outputs")
 
 # expect the stack exports the names of the consumer / access key params for us
-access_key_name=$(echo $outputs | jq -r '.[] | select(.OutputKey == "AccessTokenName") | .OutputValue')
+access_token_name=$(echo $outputs | jq -r '.[] | select(.OutputKey == "AccessTokenName") | .OutputValue')
 consumer_key_name=$(echo $outputs | jq -r '.[] | select(.OutputKey == "ConsumerKeyName") | .OutputValue')
 
-if [ -z "$access_key_name" ] || [ -z "$consumer_key_name" ]; then
+if [ -z "$access_token_name" ] || [ -z "$consumer_key_name" ]; then
     echo "Failed to get access token / consumer key from describe-stacks output."
     exit 1
 fi
@@ -29,8 +29,16 @@ fi
 # get the consumer / access key values from the user
 read -sp "Pocket API Consumer Key: " consumer_key_value
 echo
-read -sp "Pocket API Access Key: " access_key_value
+if [ -z "$consumer_key_value" ]; then
+    echo "Invalid Consumer Key."
+    exit 1
+fi
+read -sp "Pocket API Access Token: " access_token_value
 echo
+if [ -z "$access_token_value" ]; then
+    echo "Invalid Access Token."
+    exit 1
+fi
 
 # update the params with the new values
 aws ssm put-parameter \
@@ -41,10 +49,10 @@ aws ssm put-parameter \
     --overwrite > /dev/null
 
 aws ssm put-parameter \
-    --name "$access_key_name" \
-    --value "$access_key_value" \
+    --name "$access_token_name" \
+    --value "$access_token_value" \
     --type SecureString \
     --tier Standard \
     --overwrite > /dev/null
 
-echo "Successfully saved Pocket API keys."
+echo "Successfully saved Pocket API credentials."
