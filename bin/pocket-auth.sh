@@ -42,8 +42,29 @@ fi
 # STEP 2: Redirect user to Pocket to continue authorization
 # ====================
 
-# redirect the user to pocket
-pocket_redirect_url="https://getpocket.com/auth/authorize?request_token=$request_token&redirect_uri=$local_redirect_url"
-echo "Open this link to authorize the connection to your pocket account (ctrl+c to cancel): $pocket_redirect_url"
+echo "Open this link to authorize the connection to your pocket account (ctrl+c to cancel): https://getpocket.com/auth/authorize?request_token=$request_token&redirect_uri=$local_redirect_url"
 
-# start node server
+# ====================
+# STEP 3: Receive the callback from Pocket
+# ====================
+
+export PORT="$callback_port"
+node lib/pocketCallbackServer.js
+
+# ====================
+# STEP 4: Convert a request token into a Pocket access token
+# ====================
+
+# pocket API expects we provide consumer key and request token
+body=$(jq -n \
+    --arg key "$consumer_key" \
+    --arg token "$request_token" \
+    '{consumer_key:$key,code:$token}' )
+
+# obtain the access token
+access_token=$(curl -s -X POST https://getpocket.com/v3/oauth/authorize \
+    -H "Content-Type: application/json" \
+    -H "X-Accept: application/json" \
+    -d "$body" | jq -r '.access_token')
+
+echo $access_token
