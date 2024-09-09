@@ -40,7 +40,8 @@ if [ -z "$access_token_value" ]; then
     exit 1
 fi
 
-# update the params with the new values
+# update the params with the new values and change to SecureString type
+
 aws ssm put-parameter \
     --name "$consumer_key_name" \
     --value "$consumer_key_value" \
