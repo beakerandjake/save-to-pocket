@@ -84,6 +84,7 @@ You will need the following software installed on your machine:
 - [aws-cli] v2 (Ensure that you configured the CLI with your IAM credentials)
 - [aws-sam-cli][aws-sam-cli-url] 1.x (I prefer a local pip venv install rather than a system wide install)
 - [node.js][Node-url] 20.x
+- [python][python-url] 3.x
 - [jq][jq-url] 1.x
 
 You will also need a Pocket account.
@@ -117,17 +118,33 @@ All commands are meant for a Linux environment and should be executed against th
    ```sh
    source .venv/bin/activate
    ```
+
 5. Connect your Pocket account to the Pocket App you created in Step 1
    ```js
-   bin/pocket-auth.sh
+   bin / pocket - auth.sh;
    ```
-   This command will perform the Oauth flow to connect your Pocket account to the App you made. You will be asked to open a URL in your web browser and sign into pocket. Once signed in the command will output a Pocket _Access Token_ which you will need in a later step  
+   This command will perform the Oauth flow to connect your Pocket account to the App you made. You will be asked to open a URL in your web browser and sign into pocket. Once signed in the command will output a Pocket _Access Token_ which you will need in a later step
 6. Deploy the application to AWS
    ```sh
    bin/deploy.sh
    ```
+   You will be asked several questions during this command:
+   - `Pocket API Consumer Key:` - Input the _Consumer Key_ you generated during step 1
+   - `Pocket API Access Token:` - Input the _Access Token_ you generated during step 5.
+   - `Enter default user [user]:` - This will be a username you will use to authenticate with our API, enter a desired username or press enter for the default.
+   - `Enter user password:` - Input the desired password for the user and confirm it.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Once the `deploy` script is finished you can view the stacks in Cloudformation. You should see three new stacks _save-to-pocket-db_, _save-to-pocket-config_, and _save-to-pocket-frontend_.
+
+### Troubleshooting
+
+Depending on where the `deploy` script fails it could leave stacks in place. So before running again make sure to delete the stacks that were created, either manually or using the `delete` script:
+
+```sh
+bin/delete.sh
+```
+
+   <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
 
@@ -218,3 +235,4 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [aws-sam-cli-url]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html
 [jq-url]: https://github.com/jqlang/jq
 [pocket-dev-url]: https://getpocket.com/developer/
+[python-url]: https://www.python.org/
