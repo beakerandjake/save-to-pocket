@@ -46,15 +46,18 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-save-to-pocket is a serverless API to save items to Pocket. Under the hood it uses AWS SAM, API Gateway, DynamoDb, Lambda, Cloudformation and SSM Parameter Store. 
+Serverless API which allows you to easily save items to Pocket from many different devices using a simple HTTP POST. My specific use case for creating this project was that I wanted a way to save items to Pocket without having to sign in to Pocket on my browser or download the Pocket app to my phone. 
 
-The API Gateway methods are protected via a Lambda authorizer which uses Basic HTTP Authentication to validate credentials against a DynamoDb table of users. If authorized, a Lambda will save the item to your Pocket account via the Pocket API.
-
-The application is split between a frontend AWS SAM application for the API Gateway and related Lambdas, and two backend Cloudformation stacks for the DynamoDB database and SSM Parameter Store parameters. Organizing the stacks based on lifecycle separates the infrequently changing resources like the database and configuration from the frequently changing ones like the API Gateway. It allows allows you to delete and re-deploy the API without having to re-create the user database.
-
-Once the application is deployed to AWS, you can save items by making HTTP POST requests to the deployed API. Helper scripts are included which can be added to your `bin` directory to allow you to save items from the command line.
+Once the application is deployed to AWS, you can save items by making HTTP POST requests to the deployed API. Helper scripts are included which allow you to save items from your command line.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Architecture
+
+Under the hood it uses AWS SAM, API Gateway, DynamoDb, Lambda, Cloudformation and SSM Parameter Store. The API Gateway methods are protected via a Lambda authorizer which uses Basic HTTP Authentication to validate credentials against a DynamoDb table of users. If authorized, a Lambda will save the item to Pocket via the Pocket API.
+
+The application is split between a frontend AWS SAM application for the API Gateway and related Lambdas, and two backend Cloudformation stacks for the DynamoDB database and SSM Parameter Store parameters. Organizing the stacks based on lifecycle separates the persistent resources like the database and configuration from the frequently changing ones like the API Gateway.
+
 
 ### Built With
 
