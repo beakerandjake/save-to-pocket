@@ -1,15 +1,17 @@
 #!/bin/bash
 # Script: pocket-auth.sh
 # Description: Performs the Pocket Authentication flow outlined at: https://getpocket.com/developer/docs/authentication
-# Usage: ./pocket-auth.sh <consumer-key> [callback-port]
+# Usage: ./pocket-auth.sh [callback-port]
 set -e
 
-consumer_key=$1
-callback_port=${2:-3000}
+callback_port=${1:-3000}
 
-# ensure correct usage
-if [ "$#" -lt 1 ]; then
-    echo "usage: $0 <consumer-key>"
+# get consumer key
+read -sp "Enter Pocket consumer key:" consumer_key
+echo
+
+if [ -z "$consumer_key" ]; then
+    echo "Invalid consumer key"
     exit 1
 fi
 
@@ -67,4 +69,4 @@ access_token=$(curl -s -X POST https://getpocket.com/v3/oauth/authorize \
     -H "X-Accept: application/json" \
     -d "$body" | jq -r '.access_token')
 
-echo $access_token
+echo "Success, here is your secret pocket access token: $access_token"
