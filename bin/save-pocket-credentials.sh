@@ -47,4 +47,4 @@ aws ssm put-parameter \
     --tier Standard \
     --overwrite > /dev/null
 
-echo "Saved Pocket API keys to SSM Parameter Store."
+echo "Successfully saved Pocket API keys."
