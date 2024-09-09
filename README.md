@@ -75,21 +75,31 @@ The application is split between a frontend AWS SAM application for the API Gate
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This is a walkthrough to getting the application deployed to your AWS account. All scripts and commands in this project are for a Linux scripting environment.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+You will need the following software installed on your machine:
 
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
+- [aws-cli] v2 (Ensure that you configured the CLI with your IAM credentials)
+- [aws-sam-cli][aws-sam-cli-url] 1.x (I prefer a local pip venv install rather than a system wide install)
+- [node.js][Node-url] 20.x
+- [jq][jq-url] 1.x
+
+#### Create a Pocket API App
+
+In order to save items to pocket you have to [create][pocket-dev-url] a new Pocket API App.
+
+When creating your Pocket app:
+
+- Only the _Add_ permission is required.
+- Platform can be set to _Web_
+
+Once your application is created, it will be given a _Consumer Key_. This key will be used later in the installation so have it handy, but kept secure (don't commit it to source control).
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Create a pocket application and note the _Consumer Key_ (see instructions)[#create_a_pocket_api_app]
 2. Clone the repo
    ```sh
    git clone https://github.com/github_username/repo_name.git
@@ -195,3 +205,7 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [Node-url]: https://nodejs.org
 [Bash]: https://img.shields.io/badge/GNU%20Bash-4EAA25?style=for-the-badge&logo=GNU%20Bash&logoColor=white
 [Bash-url]: https://www.gnu.org/software/bash/
+[aws-cli]: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+[aws-sam-cli-url]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html
+[jq-url]: https://github.com/jqlang/jq
+[pocket-dev-url]: https://getpocket.com/developer/
