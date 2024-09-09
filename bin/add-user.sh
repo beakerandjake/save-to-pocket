@@ -20,9 +20,9 @@ table_name=$(aws cloudformation describe-stacks \
     --output text)
 
 # prompt for the password of the new user
-read -sp "Password:" p1
+read -sp "Enter user password:" p1
 echo
-read -sp "Confirm password:" p2
+read -sp "Confirm user password:" p2
 echo
 
 # ensure entered passwords match
@@ -39,4 +39,4 @@ aws dynamodb put-item \
     --table-name "$table_name" \
     --item "{\"id\":{\"S\": \"$user_name\"},\"hashed_password\":{\"S\":\"$hashed_password\"}}"
 
-echo "Successfully added to Users table."
+echo "Successfully added new user: $user_name"
