@@ -288,7 +288,7 @@ This will use the SAM CLI to invoke the lambda with an event payload defined at 
   "identitySource": ["Basic dXNlcm5hbWU6cGFzc3dvcmQ="],
 ```
 
-It's value is a Basic Authorization header. The Lambda will return an authorized or unauthorized status depending on whether or not a user exists in the DynamoDB table which has matching credentials.
+The value is a Basic Authorization header. The Lambda will return an authorized or unauthorized status depending on whether or not a user exists in the DynamoDB table which has matching credentials.
 
 #### Save Item Lambda
 
