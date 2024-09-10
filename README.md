@@ -113,22 +113,18 @@ All commands are meant for a Linux environment and should be executed against th
    ```sh
    git clone https://github.com/beakerandjake/save-to-pocket.git
    ```
-3. Install NPM packages (Optional, only necessary for local development)
-   ```sh
-   npm install
-   ```
-4. Activate venv for aws-sam-cli (Optional, only necessary if you installed through a venv)
+3. Activate venv for aws-sam-cli (Optional, only necessary if you installed through a venv)
 
    ```sh
    source .venv/bin/activate
    ```
 
-5. Connect your Pocket account to the Pocket App you created in Step 1
+4. Connect your Pocket account to the Pocket App you created in Step 1
    ```sh
    bin/pocket-auth.sh
    ```
    This command will perform the Oauth flow to connect your Pocket account to the App you made. You will be asked to open a URL in your web browser and sign into pocket. Once signed in the command will output a Pocket _Access Token_ which you will need in a later step (This token should be treated like a secret and not committed to source control).
-6. Deploy the application to AWS
+5. Deploy the application to AWS
    ```sh
    bin/deploy.sh
    ```
@@ -158,6 +154,8 @@ Once the API is deployed you can save items to Pocket by posting to the API. Thi
 
 **NOTE**: Because basic HTTP Authentication is used, all calls to the API must be made via HTTPS. This point probably isn't even worth mentioning because API Gateway does does not support HTTP, only HTTPS.
 
+To save an item you can run the `save-to-pocket` helper script. This script does a simple POST request to the API, and takes care of the Basic Authorization header. It looks for a config file located by default at `~/.save-to-pocket/config`.
+
 ### CLI Installation
 
 A helper shell script to post to your API is included in this project. You can install this script to your machine by including it in your PATH. Personally, I installed it by copying it to `/usr/local/bin`
@@ -178,7 +176,7 @@ A helper shell script to post to your API is included in this project. You can i
     The config file should have the following contents:
 
     ```ini
-    url=https://YOUR_API_GATEWAY_URL
+    url=https://YOUR_API_GATEWAY_URL/v1/items
     username=USERNAME_CREATED_DURING_DEPLOY
     password=PASSWORD_CREATED_DURING_DEPLOY
     ```
@@ -197,8 +195,23 @@ A helper shell script to post to your API is included in this project. You can i
 
 ### Adding Users
 
-Adding one user per device todo
+If you post to the API from multiple devices, you could configure unique credentials per device. To add new credentials to the API you can use the helper script `add-user`. This script will insert a new row into the DynamoDB table which stores users and their hashed credentials.
 
+Usage:
+
+```sh
+bin/add-user.sh <stack-name> <username>
+```
+
+Example:
+
+Add a new user called 'laptop'
+
+```sh
+bin/add-user.sh save-to-pocket-db laptop
+```
+
+You will be asked to enter and then confirm the password. On success the user will be added to the DynamoDB table. You can verify this in the AWS management console. You can configure your new device to store the new credentials outlined in [CLI Installation](#cli-installation)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -206,10 +219,56 @@ Adding one user per device todo
 
 ## Local Development
 
+To develop locally you will need all of the dependencies defined in the [prerequisites](#prerequisites) section.
+
+First install the npm packages, these are required for linting / formatting:
+
+```sh
+npm install
+```
+
+### Testing
+
+The project uses npm workspaces for organization. Each Lambda function inside of the `src` folder is a workspace and defines test commands to locally invoke the Lambda using the AWS SAM CLI.
+
+The SAM CLI invokes the Lambda functions with environment variables defined in `local-env.json` as well as events defined in the `events/` folder.
+
+#### Authorize Lambda
+
+To test the authorize lambda run the following command:
+
+```sh
+npm test -w authorize
+```
+
+This will use the SAM CLI to invoke the lambda with an event payload defined at `events/authorize.json`. The field of interest is:
+
+```json
+  "identitySource": ["Basic dXNlcm5hbWU6cGFzc3dvcmQ="],
+```
+
+It's value is a Basic Authorization header. The Lambda will return an authorized or unauthorized status depending on whether or not a user exists in the DynamoDB table which has matching credentials.
+
+#### Save Item Lambda
+
+To test the Save Item lambda run the following command:
+
+```sh
+npm test -w save-item
+```
+
+The save item Lambda's event is defined in `events/save-item.json`. The field of interest is:
+```json
+"body": "{\"url\":\"https://en.wikipedia.org/wiki/Dodo\"}",
+```
+
+Modify the value of the `url` property to whatever item you wish to save.
+
 Add notes about
 
-- npm test -w
+
 - sam build / deploy / etc
+
 
 <!-- ROADMAP -->
 
