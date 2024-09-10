@@ -121,7 +121,7 @@ All commands are meant for a Linux environment and should be executed against th
 
 5. Connect your Pocket account to the Pocket App you created in Step 1
    ```js
-   bin / pocket - auth.sh;
+   bin/pocket-auth.sh;
    ```
    This command will perform the Oauth flow to connect your Pocket account to the App you made. You will be asked to open a URL in your web browser and sign into pocket. Once signed in the command will output a Pocket _Access Token_ which you will need in a later step (This token should be treated like a secret and not committed to source control).
 6. Deploy the application to AWS
@@ -152,11 +152,11 @@ bin/delete.sh
 
 Once the API is deployed you can save items to Pocket by posting to the API. This means you can use any device that you can generate an HTTP post from. I personally interact with the API via command line scripts from my desktop and laptop as well as an iOS shortcut on my phone.
 
-**NOTE**: Because basic HTTP Authentication is used, all calls to the API must be made via HTTPS. This point probably isn't even worth mentioning because API Gateway does does not support HTTP, only HTTPS. 
+**NOTE**: Because basic HTTP Authentication is used, all calls to the API must be made via HTTPS. This point probably isn't even worth mentioning because API Gateway does does not support HTTP, only HTTPS.
 
 ### CLI Installation
 
-A shell script to post to pocket is included in this project. You can install this script to your machine by including it in your PATH. I installed it on my machine by copying it to `/usr/local/bin`
+A helper shell script to post to your API is included in this project. You can install this script to your machine by including it in your PATH. Personally, I installed it by copying it to `/usr/local/bin`
 
 1.  Install the `save-to-pocket` script
 
@@ -181,16 +181,17 @@ A shell script to post to pocket is included in this project. You can install th
 
 3.  Once you have added the `save-to-pocket` script to your path and created the config file you can run the following command to save items to pocket from your CLI.
 
-    ```sh
-    save-to-pocket <url>
-    ```
+        ```sh
+        save-to-pocket <url>
+        ```
 
-    Example:
+        Example:
 
-    ```sh
-    save-to-pocket "https://en.wikipedia.org/wiki/Scheme_(programming_language)"
-    ```
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+        ```sh
+        save-to-pocket "https://en.wikipedia.org/wiki/Scheme_(programming_language)"
+        ```
+
+    <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 
