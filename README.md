@@ -136,6 +136,9 @@ All commands are meant for a Linux environment and should be executed against th
 
 Once the `deploy` script is finished you can view the stacks in Cloudformation. You should see three new stacks _save-to-pocket-db_, _save-to-pocket-config_, and _save-to-pocket-frontend_.
 
+**NOTE**: When this API is deployed to AWS it uses On-Demand pricing, meaning you are charged per API Gateway invocation, Lambda invocation, and DynamoDB read request. However the expected usage of the API will be extremely low since you only invoke it when you save an item to pocket. This amount of usage should fall within the free tier of AWS. _Because the API is publicly deployed you should ensure that you monitor usage and billing on AWS to ensure that no malicious actor is spamming it with requests, since you will be charged._
+
+
 ### Troubleshooting
 
 Depending on where the `deploy` script fails it could leave stacks in place. So before running again make sure to delete the stacks that were created, either manually or using the `delete` script:
@@ -221,17 +224,45 @@ You will be asked to enter and then confirm the password. On success the user wi
 
 To develop locally you will need all of the dependencies defined in the [prerequisites](#prerequisites) section.
 
-First install the npm packages, these are required for linting / formatting:
+The AWS SAM stack is defined in `template.yml`, the cloudformation stacks are defined in the `resources/` folder. The Lambda functions are defined in the `src/` folder.
+
+The first step for local development is to install the npm packages, these are required for linting / formatting:
 
 ```sh
 npm install
 ```
+
+### Deploying
+
+If you make modifications to the Lambda functions or to the SAM template you can test the deployment using the SAM CLI.
+
+```sh
+sam deploy
+```
+
+This will deploy any changes you have made to the Lambda functions. 
 
 ### Testing
 
 The project uses npm workspaces for organization. Each Lambda function inside of the `src` folder is a workspace and defines test commands to locally invoke the Lambda using the AWS SAM CLI.
 
 The SAM CLI invokes the Lambda functions with environment variables defined in `local-env.json` as well as events defined in the `events/` folder.
+
+#### Environment Variables
+
+When the Lambda functions are invoked via the AWS SAM CLI, their environment variables are defined in the `local-env.json` file. You will need to update this file with the table name from your deployed _save-to-pocket-db_ stack.
+
+```json
+{
+  "SaveItemFunction": {
+    "POCKET_ACCESS_TOKEN_PARAM_NAME": "/save-to-pocket/access-token",
+    "POCKET_CONSUMER_KEY_PARAM_NAME": "/save-to-pocket/consumer-key"
+  },
+  "AuthorizeFunction": {
+    "DYNAMODB_TABLE_NAME": "enter-table-name-here"
+  }
+}
+```
 
 #### Authorize Lambda
 
@@ -258,71 +289,28 @@ npm test -w save-item
 ```
 
 The save item Lambda's event is defined in `events/save-item.json`. The field of interest is:
+
 ```json
 "body": "{\"url\":\"https://en.wikipedia.org/wiki/Dodo\"}",
 ```
 
 Modify the value of the `url` property to whatever item you wish to save.
 
-Add notes about
-
-
-- sam build / deploy / etc
-
-
-<!-- ROADMAP -->
-
-## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-  - [ ] Nested Feature
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- CONTRIBUTING -->
 
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Top contributors:
-
-<a href="https://github.com/github_username/repo_name/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=github_username/repo_name" alt="contrib.rocks image" />
-</a>
 
 <!-- LICENSE -->
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the GNU GPL-3.0 License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTACT -->
 
-## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
 
