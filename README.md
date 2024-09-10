@@ -120,8 +120,8 @@ All commands are meant for a Linux environment and should be executed against th
    ```
 
 5. Connect your Pocket account to the Pocket App you created in Step 1
-   ```js
-   bin/pocket-auth.sh;
+   ```sh
+   bin/pocket-auth.sh
    ```
    This command will perform the Oauth flow to connect your Pocket account to the App you made. You will be asked to open a URL in your web browser and sign into pocket. Once signed in the command will output a Pocket _Access Token_ which you will need in a later step (This token should be treated like a secret and not committed to source control).
 6. Deploy the application to AWS
