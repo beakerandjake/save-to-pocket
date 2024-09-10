@@ -165,7 +165,7 @@ bin/delete.sh
 
 Once the API is deployed you can save items to Pocket by posting to the API. This means you can use any device that you can generate an HTTP post from. I personally interact with the API via command line scripts from my desktop and laptop as well as an iOS shortcut on my phone.
 
-**NOTE**: Because basic HTTP Authentication is used, all calls to the API must be made via HTTPS. This point probably isn't even worth mentioning because API Gateway does does not support HTTP, only HTTPS.
+**NOTE**: Because basic HTTP Authentication is used, all calls to the API must be made via HTTPS.
 
 To save an item you can run the `save-to-pocket` helper script. This script does a simple POST request to the API, and takes care of the Basic Authorization header. It looks for a config file located by default at `~/.save-to-pocket/config`.
 
