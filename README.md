@@ -181,17 +181,26 @@ A helper shell script to post to your API is included in this project. You can i
 
 3.  Once you have added the `save-to-pocket` script to your path and created the config file you can run the following command to save items to pocket from your CLI.
 
-        ```sh
-        save-to-pocket <url>
-        ```
+    ```sh
+    save-to-pocket <url>
+    ```
 
-        Example:
+    Example:
 
-        ```sh
-        save-to-pocket "https://en.wikipedia.org/wiki/Scheme_(programming_language)"
-        ```
+    ```sh
+    save-to-pocket "https://en.wikipedia.org/wiki/Scheme_(programming_language)"
+    ```
 
-    <p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LOCAL DEVELOPMENT -->
+
+## Local Development
+
+Add notes about
+
+- npm test -w
+- sam build / deploy / etc
 
 <!-- ROADMAP -->
 
