@@ -191,6 +191,11 @@ A helper shell script to post to your API is included in this project. You can i
     save-to-pocket "https://en.wikipedia.org/wiki/Scheme_(programming_language)"
     ```
 
+### Adding Users
+
+Adding one user per device todo
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LOCAL DEVELOPMENT -->
