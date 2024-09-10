@@ -59,7 +59,7 @@
     <img src="https://github.com/user-attachments/assets/a39ed676-0bd6-4035-9e53-10db6c33e047" alt="Project Screenshot" />
 </div>
 
-Serverless API which allows you to easily save items to Pocket from many different devices using a simple HTTP POST. My specific use case for creating this project was that I wanted a way to save items to Pocket without having to sign in to Pocket on my browser or download the Pocket app to my phone.
+Serverless API which allows you to easily save items to Pocket from many different devices using a simple HTTP POST. My specific use case for creating this project was that I wanted a way to save items without having to sign in on my browser or download the Pocket app to my phone.
 
 Once the application is deployed to AWS, you can save items by making HTTP POST requests to the deployed API. Helper scripts are included which allow you to save items from your command line.
 
