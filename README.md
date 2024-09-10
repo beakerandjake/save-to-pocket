@@ -123,7 +123,7 @@ All commands are meant for a Linux environment and should be executed against th
    ```js
    bin / pocket - auth.sh;
    ```
-   This command will perform the Oauth flow to connect your Pocket account to the App you made. You will be asked to open a URL in your web browser and sign into pocket. Once signed in the command will output a Pocket _Access Token_ which you will need in a later step
+   This command will perform the Oauth flow to connect your Pocket account to the App you made. You will be asked to open a URL in your web browser and sign into pocket. Once signed in the command will output a Pocket _Access Token_ which you will need in a later step (This token should be treated like a secret and not committed to source control).
 6. Deploy the application to AWS
    ```sh
    bin/deploy.sh
@@ -150,10 +150,46 @@ bin/delete.sh
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Once the API is deployed you can save items to Pocket by posting to the API. This means you can use any device that you can generate an HTTP post from. I personally interact with the API via command line scripts from my desktop and laptop as well as an iOS shortcut on my phone.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+**NOTE**: Because basic HTTP Authentication is used, all calls to the API must be made via HTTPS. This point probably isn't even worth mentioning because API Gateway does does not support HTTP, only HTTPS. 
 
+### CLI Installation
+
+A shell script to post to pocket is included in this project. You can install this script to your machine by including it in your PATH. I installed it on my machine by copying it to `/usr/local/bin`
+
+1.  Install the `save-to-pocket` script
+
+    ```sh
+    sudo cp bin/save-to-pocket.sh /usr/local/bin/save-to-pocket
+    ```
+
+2.  Create the config file for the `save-to-pocket` script
+
+    ```sh
+    mkdir -p ~/.save-to-pocket
+    touch ~/.save-to-pocket/config
+    ```
+
+    The config file should have the following contents:
+
+    ```ini
+    url=https://YOUR_API_GATEWAY_URL
+    username=USERNAME_CREATED_DURING_DEPLOY
+    password=PASSWORD_CREATED_DURING_DEPLOY
+    ```
+
+3.  Once you have added the `save-to-pocket` script to your path and created the config file you can run the following command to save items to pocket from your CLI.
+
+    ```sh
+    save-to-pocket <url>
+    ```
+
+    Example:
+
+    ```sh
+    save-to-pocket "https://en.wikipedia.org/wiki/Scheme_(programming_language)"
+    ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
