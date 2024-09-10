@@ -6,7 +6,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/beakerandjake/save-to-pocket">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/user-attachments/assets/225a733b-cfdc-4077-b1f0-c7f6aeefe079" alt="Logo" width="80" height="80">
   </a>
   <h2 align="center">save-to-pocket</h2>
   <p align="center">
