@@ -18,8 +18,9 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#about-the-project">About The Project</a></li>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#architecture">Architecture</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -29,14 +30,24 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
+    <li>
+      <a href="#usage">Usage</a>
+      <ul>
+        <li><a href="#cli-installation">CLI Installation</a></li>
+        <li><a href="#adding-users">Adding Users</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#local-development">Local Development</a>
+      <ul>
+        <li><a href="#deploying">Deploying</a></li>
+        <li><a href="#testing">Testing</a></li>
+      </ul>
+    </li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -136,8 +147,7 @@ All commands are meant for a Linux environment and should be executed against th
 
 Once the `deploy` script is finished you can view the stacks in Cloudformation. You should see three new stacks _save-to-pocket-db_, _save-to-pocket-config_, and _save-to-pocket-frontend_.
 
-**NOTE**: When this API is deployed to AWS it uses On-Demand pricing, meaning you are charged per API Gateway invocation, Lambda invocation, and DynamoDB read request. However the expected usage of the API will be extremely low since you only invoke it when you save an item to pocket. This amount of usage should fall within the free tier of AWS. _Because the API is publicly deployed you should ensure that you monitor usage and billing on AWS to ensure that no malicious actor is spamming it with requests, since you will be charged._
-
+**NOTE**: When this API is deployed to AWS it uses On-Demand pricing, meaning you are charged per API Gateway invocation, Lambda invocation, and DynamoDB read request. The expected usage of the API will be extremely low since you only invoke it when you save an item to pocket. This amount of usage should fall within the free tier of AWS. _However, because the API is publicly deployed you should ensure that you monitor usage and billing on AWS to ensure that no malicious actor is spamming it with requests, since you will be charged._
 
 ### Troubleshooting
 
@@ -240,7 +250,7 @@ If you make modifications to the Lambda functions or to the SAM template you can
 sam deploy
 ```
 
-This will deploy any changes you have made to the Lambda functions. 
+This will deploy any changes you have made to the Lambda functions.
 
 ### Testing
 
@@ -298,27 +308,11 @@ Modify the value of the `url` property to whatever item you wish to save.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- LICENSE -->
 
 ## License
 
 Distributed under the GNU GPL-3.0 License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTACT -->
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-- []()
-- []()
-- []()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
