@@ -141,7 +141,7 @@ All commands are meant for a Linux environment and should be executed against th
    ```
    You will be asked several questions during this command:
    - `Pocket API Consumer Key:` - Input the _Consumer Key_ you generated during step 1
-   - `Pocket API Access Token:` - Input the _Access Token_ you generated during step 5.
+   - `Pocket API Access Token:` - Input the _Access Token_ you generated during step 4.
    - `Enter default user [user]:` - This will be a username you will use to authenticate with our API, enter a desired username or press enter for the default.
    - `Enter user password:` - Input the desired password for the user and confirm it.
 
