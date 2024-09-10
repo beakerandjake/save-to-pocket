@@ -44,6 +44,10 @@
 
 ## About The Project
 
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/a39ed676-0bd6-4035-9e53-10db6c33e047" alt="Project Screenshot" />
+</div>
+
 Serverless API which allows you to easily save items to Pocket from many different devices using a simple HTTP POST. My specific use case for creating this project was that I wanted a way to save items to Pocket without having to sign in to Pocket on my browser or download the Pocket app to my phone.
 
 Once the application is deployed to AWS, you can save items by making HTTP POST requests to the deployed API. Helper scripts are included which allow you to save items from your command line.
@@ -59,7 +63,7 @@ Under the hood it uses AWS SAM, API Gateway, DynamoDb, Lambda, Cloudformation an
 The application is split between a frontend AWS SAM application for the API Gateway and related Lambdas, and two backend Cloudformation stacks for the DynamoDB database and SSM Parameter Store parameters. Organizing the stacks based on lifecycle separates the persistent resources like the database and configuration from the frequently changing ones like the API Gateway.
 
 <div align="center">
-    <img src="https://github.com/user-attachments/assets/cc94ecd0-824c-458c-886e-a45637cbcd03" />
+    <img src="https://github.com/user-attachments/assets/cc94ecd0-824c-458c-886e-a45637cbcd03" alt="Architecture diagram" />
 </div>
 
 ### Built With
