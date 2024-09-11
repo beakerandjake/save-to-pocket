@@ -147,7 +147,7 @@ All commands are meant for a Linux environment and should be executed against th
 
 Once the `deploy` script is finished you can view the stacks in Cloudformation. You should see three new stacks _save-to-pocket-db_, _save-to-pocket-config_, and _save-to-pocket-frontend_.
 
-**NOTE**: When this API is deployed to AWS it uses On-Demand pricing, meaning you are charged per API Gateway invocation, Lambda invocation, and DynamoDB read request. The expected usage of the API will be extremely low since you only invoke it when you save an item to pocket. This amount of usage should fall within the free tier of AWS. _However, because the API is publicly deployed you should ensure that you monitor usage and billing on AWS to ensure that no malicious actor is spamming it with requests, since you will be charged._
+**NOTE**: When this API is deployed to AWS it uses On-Demand pricing, meaning you are charged per API Gateway invocation, Lambda invocation, and DynamoDB read request. The expected usage of the API will be extremely low since you only invoke it when you save an item. This amount of usage should fall within the free tier of AWS. _However, because the API is publicly deployed you should ensure that you monitor usage and billing on AWS to ensure that no malicious actor is spamming it with requests, since you will be charged._
 
 ### Troubleshooting
 
